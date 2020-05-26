@@ -37,9 +37,9 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      */
     private String tableAlias;
 
-    public QueryWrapper<T> eqIsNotEmpty(boolean condition, String column, Object val) {
+    public QueryWrapper<T> eqIsNotEmpty(String column, Object val) {
         if (StringUtils.isNotEmpty(val)) {
-            return super.eq(condition, column, val);
+            return super.eq(column, val);
         }
         return this;
     }
