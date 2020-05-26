@@ -85,7 +85,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
             ColumnOriginal fieldColumnOriginal = field.getAnnotation(ColumnOriginal.class);
             if (null == fieldColumnOriginal) {
-                this.resultFields.add(ConvertUtils.camelToUnderline(field.getName()) + "as" + field.getName());
+                this.resultFields.add(ConvertUtils.camelToUnderline(field.getName()) + " as " + field.getName());
             } else {
                 String column = fieldColumnOriginal.value();
                 this.resultFields.add(column + " as " + field.getName());
