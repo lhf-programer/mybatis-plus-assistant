@@ -26,6 +26,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      * 链表
      */
     private final List<String> joinTables = new ArrayList<>();
+    private static final List<String> KEYWORDS = new ArrayList<>();
     /**
      * 去重
      */
@@ -36,6 +37,11 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      * 表的别名
      */
     private String tableAlias;
+
+    static {
+        KEYWORDS.add("size");
+        KEYWORDS.add("name");
+    }
 
     public QueryWrapper<T> eqIsNotEmpty(String column, Object val) {
         if (StringUtils.isNotEmpty(val)) {
@@ -84,11 +90,17 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
             }
 
             ColumnOriginal fieldColumnOriginal = field.getAnnotation(ColumnOriginal.class);
+            String fieldName = field.getName();
+            // 敏感字符处理
+            if (KEYWORDS.contains(fieldName)) {
+                fieldName = "`" + fieldName + "`";
+            }
+
             if (null == fieldColumnOriginal) {
-                this.resultFields.add(ConvertUtils.camelToUnderline(field.getName()) + " as " + field.getName());
+                this.resultFields.add(ConvertUtils.camelToUnderline(fieldName) + " as " + fieldName);
             } else {
                 String column = fieldColumnOriginal.value();
-                this.resultFields.add(column + " as " + field.getName());
+                this.resultFields.add(column + " as " + fieldName);
             }
         }
 
