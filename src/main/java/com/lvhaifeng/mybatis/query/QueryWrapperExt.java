@@ -37,6 +37,13 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      */
     private String tableAlias;
 
+    public QueryWrapper<T> eqIsNotEmpty(boolean condition, String column, Object val) {
+        if (StringUtils.isNotEmpty(val)) {
+            return super.eq(condition, column, val);
+        }
+        return this;
+    }
+
     public Joiner createJoiner(String firstTable) {
         this.joinTables.clear();
         return new Joiner(firstTable);
@@ -112,7 +119,9 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
             }
         }
 
-        super.select(tableColumn.toArray(new String[tableColumn.size()]));
+        if (!tableColumn.isEmpty()) {
+            super.select(tableColumn.toArray(new String[tableColumn.size()]));
+        }
     }
 
     /**
