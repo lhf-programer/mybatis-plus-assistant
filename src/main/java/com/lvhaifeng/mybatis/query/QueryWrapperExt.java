@@ -50,6 +50,20 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return this;
     }
 
+    public QueryWrapper<T> likeIsNotNull(String column, String left, Object val, String right) {
+        if(null != val) {
+            return super.like(column, left + val + right);
+        }
+        return this;
+    }
+
+    public QueryWrapper<T> likeIsNotBlank(String column, String left, Object val, String right) {
+        if(StringUtils.isNotEmpty(val)) {
+            return super.like(column, left + val + right);
+        }
+        return this;
+    }
+
     public Joiner createJoiner(String firstTable) {
         this.joinTables.clear();
         return new Joiner(firstTable);
