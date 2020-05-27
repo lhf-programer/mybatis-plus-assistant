@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.lvhaifeng.mybatis</groupId>
     <artifactId>mybatis-plus-assistant</artifactId>
-    <version>v1.5</version>
+    <version>v1.7</version>
     <name>mybatis-plus-assistant</name>
     <description>mybtais-plus 助手</description>
 
