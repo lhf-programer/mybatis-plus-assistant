@@ -43,23 +43,51 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         KEYWORDS.add("name");
     }
 
-    public QueryWrapper<T> eqIsNotEmpty(String column, Object val) {
+    public QueryWrapperExt<T> eqIsNotEmpty(String column, Object val) {
         if (StringUtils.isNotEmpty(val)) {
-            return super.eq(column, val);
+            super.eq(column, val);
         }
         return this;
     }
 
-    public QueryWrapper<T> likeIsNotNull(String column, String left, Object val, String right) {
+    public QueryWrapperExt<T> likeIsNotNull(String column, Object val) {
         if(null != val) {
-            return super.like(column, left + val + right);
+            super.like(column, val);
         }
         return this;
     }
 
-    public QueryWrapper<T> likeIsNotBlank(String column, String left, Object val, String right) {
+    public QueryWrapperExt<T> likeLeftIsNotNull(String column, Object val) {
+        if(null != val) {
+            super.likeLeft(column, val);
+        }
+        return this;
+    }
+
+    public QueryWrapperExt<T> likeRightIsNotNull(String column, Object val) {
+        if(null != val) {
+            super.likeRight(column, val);
+        }
+        return this;
+    }
+
+    public QueryWrapperExt<T> likeIsNotBlank(String column, Object val) {
         if(StringUtils.isNotEmpty(val)) {
-            return super.like(column, left + val + right);
+            super.like(column, val);
+        }
+        return this;
+    }
+
+    public QueryWrapperExt<T> likeLeftIsNotBlank(String column, Object val) {
+        if(StringUtils.isNotEmpty(val)) {
+            super.likeLeft(column, val);
+        }
+        return this;
+    }
+
+    public QueryWrapperExt<T> likeRightIsNotBlank(String column, Object val) {
+        if(StringUtils.isNotEmpty(val)) {
+            super.likeRight(column, val);
         }
         return this;
     }
